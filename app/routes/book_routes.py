@@ -6,7 +6,7 @@ from app.schema.book_schema import BookCreateSchema, BookResponseSchema
 from app.services import book_services
 
 
-book_router = APIRouter(tags=['Books'], prefix='/book')
+book_router = APIRouter(tags=['Books'], prefix='/books')
 
 
 @book_router.get('', status_code=status.HTTP_200_OK)
