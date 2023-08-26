@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, status
 
 from app.models import book_model
 from app.database import engine
@@ -9,5 +9,5 @@ app = FastAPI(title='BooksAPI', description='A Simple books REST API to demonstr
 
 
 @app.get('/')
-async def index():
-    return {'message': 'Welcome to microservices docker added'}
+async def health_check():
+    return {'health_status': status.HTTP_200_OK}
