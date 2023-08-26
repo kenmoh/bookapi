@@ -12,4 +12,4 @@ class Book(Base):
     title: Mapped[str] = mapped_column(String(50))
     description: Mapped[str] = mapped_column(String(100))
     isbn: Mapped[str]
-    rating: Mapped[int]
+    rating: Mapped[int] = mapped_column(Integer, nullable=True)
