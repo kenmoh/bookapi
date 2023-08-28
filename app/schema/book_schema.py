@@ -10,7 +10,17 @@ class BookCreateSchema(BaseModel):
 
 class BookResponseSchema(BookCreateSchema):
     id: int
-    rating: int | None = Field(ge=1, le=5, default=1)
+    rating: int | None = Field(gt=0, le=5)
 
 
+class ReviewResponseSchema(BaseModel):
+    book_id: int
+    review_body: str
+    review_by: str
+    rating: int | None
 
+
+class ReviewCreateSchema(BaseModel):
+    review_by: str
+    review_body: str
+    rating: int = Field(gt=0, le=5)
