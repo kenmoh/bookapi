@@ -61,3 +61,8 @@ def test_get_book_reviews():
 def test_add_book_review():
     response = client.post(f'{BASE_URL}/reviews/4', json=review_data)
     assert response.status_code == status.HTTP_201_CREATED
+
+
+def test_avg_book_rating():
+    response = client.get(f'{BASE_URL}/average-rating/5')
+    assert response.status_code == status.HTTP_200_OK

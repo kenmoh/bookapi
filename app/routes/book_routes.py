@@ -56,5 +56,5 @@ def add_review(book_id, review: ReviewCreateSchema) -> ReviewResponseSchema:
 @book_router.get('/average-rating/{book_id}', status_code=status.HTTP_200_OK)
 def get_avg_book_rating(book_id) -> float:
     response = requests.get(f'{REVIEW_URL}/average-rating/{book_id}')
-    data = response.json()
-    return data
+    avg_rating = response.json()
+    return avg_rating
