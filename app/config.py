@@ -2,7 +2,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
-    DB_URL: str
+    BOOK_DB_URL: str
 
     class Config:
         env_file = '.env'
