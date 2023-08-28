@@ -8,12 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      BOOK_DB_URL: ${{ secrets.BOOK_DB_URL }}
     steps:
-      - name: Setup env
-        run: |
-          touch .env
-          echo  BOOK_DB_URL = ${{ secrets.BOOK_DB_URL }} >> .env
-          cat .env
       - name: Start
         uses: actions/checkout@v3
       - name: Install python
