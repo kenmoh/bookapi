@@ -8,7 +8,7 @@ from app.services import book_services
 
 
 book_router = APIRouter(tags=['Books'], prefix='/api/books')
-REVIEW_URL = 'http://0.0.0:8000/api/reviews'
+REVIEW_URL = 'https://reviewapi.onrender.com/api/reviews'
 
 
 @book_router.get('', status_code=status.HTTP_200_OK)

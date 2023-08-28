@@ -4,8 +4,8 @@ from fastapi.testclient import TestClient
 from app.main import app
 
 client = TestClient(app)
-BASE_URL = 'http://127.0.0.1:5000/api/books'
-HEALTH_URL = 'http://127.0.0.1:5000'
+BASE_URL = 'https://bookapi-6soz.onrender.com/api/books'
+HEALTH_URL = 'https://bookapi-6soz.onrender.com'
 
 data = {
     'author': 'Sammy Lee',
