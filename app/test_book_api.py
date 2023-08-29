@@ -53,7 +53,7 @@ def test_get_book():
     Test get book by ID
     :return: Book object
     """
-    response = client.get(f'{BASE_URL}/3')
+    response = client.get(f'{BASE_URL}/5')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -62,7 +62,7 @@ def test_get_book_reviews():
     Get all reviews for a single book
     :return: List of reviews for a book
     """
-    response = client.get(f'{BASE_URL}/reviews/3')
+    response = client.get(f'{BASE_URL}/reviews/5')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -85,5 +85,5 @@ def test_avg_book_rating():
 
 
 def test_delete_book():
-    response = client.delete(f'{BASE_URL}/3')
+    response = client.delete(f'{BASE_URL}/5')
     assert response.status_code == status.HTTP_204_NO_CONTENT
