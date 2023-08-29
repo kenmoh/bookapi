@@ -49,6 +49,10 @@ def test_update_book():
 
 
 def test_get_book():
+    """
+    Test get book by ID
+    :return: Book object
+    """
     response = client.get(f'{BASE_URL}/4')
     assert response.status_code == status.HTTP_200_OK
 
