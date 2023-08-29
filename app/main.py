@@ -1,8 +1,8 @@
 from fastapi import FastAPI, status
 
-from app.models import book_model
+from app.models import movie_model
 from app.database import engine
-from app.routes import book_routes
+from app.routes import movie_routes
 
 book_model.Base.metadata.create_all(bind=engine)
 

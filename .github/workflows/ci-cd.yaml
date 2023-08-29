@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      BOOK_DB_URL: ${{ secrets.BOOK_DB_URL }}
+      BOOK_DB_URL: ${{ secrets.MOVIES_DB_URL }}
     steps:
       - name: Start
         uses: actions/checkout@v3
@@ -26,7 +26,7 @@ jobs:
     name: Test Books API
     runs-on: ubuntu-latest
     env:
-      BOOK_DB_URL: ${{ secrets.BOOK_DB_URL }}
+      BOOK_DB_URL: ${{ secrets.MOVIES_DB_URL }}
     needs:
       - build
     steps:

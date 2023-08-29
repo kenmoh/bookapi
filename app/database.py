@@ -3,7 +3,7 @@ from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from .config import settings
 
-SQLALCHEMY_DATABASE_URL = settings.BOOK_DB_URL
+SQLALCHEMY_DATABASE_URL = settings.MOVIES_DB_URL
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
