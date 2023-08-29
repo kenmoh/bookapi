@@ -37,14 +37,14 @@ def delete_book(book_id: int, db: Session = Depends(get_db)):
 
 
 @book_router.get('/reviews/{book_id}', status_code=status.HTTP_200_OK)
-def get_book_reviews(book_id) -> list[ReviewResponseSchema]:
+def get_book_reviews(book_id: int) -> list[ReviewResponseSchema]:
     response = requests.get(f'{REVIEW_URL}/{book_id}')
-    data = response.json()
+    data: list = response.json()
     return data
 
 
 @book_router.post('/reviews/{book_id}', status_code=status.HTTP_201_CREATED)
-def add_review(book_id, review: ReviewCreateSchema) -> ReviewResponseSchema:
+def add_review(book_id: int, review: ReviewCreateSchema) -> ReviewResponseSchema:
     data = {
        "review_body": review.review_body, "review_by": review.review_by, 'rating': review.rating
     }
@@ -54,7 +54,7 @@ def add_review(book_id, review: ReviewCreateSchema) -> ReviewResponseSchema:
 
 
 @book_router.get('/average-rating/{book_id}', status_code=status.HTTP_200_OK)
-def get_avg_book_rating(book_id) -> float:
+def get_avg_book_rating(book_id: int) -> float:
     response = requests.get(f'{REVIEW_URL}/average-rating/{book_id}')
-    avg_rating = response.json()
+    avg_rating: float = response.json()
     return avg_rating

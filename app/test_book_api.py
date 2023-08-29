@@ -54,7 +54,7 @@ def test_get_book():
 
 
 def test_get_book_reviews():
-    response = client.get(f'{BASE_URL}/reviews/5')
+    response = client.get(f'{BASE_URL}/reviews/3')
     assert response.status_code == status.HTTP_200_OK
 
 
