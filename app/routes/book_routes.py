@@ -33,6 +33,7 @@ def get_book(book_id, db: Session = Depends(get_db)) -> BookResponseSchema:
 
 @book_router.delete('/{book_id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_book(book_id: int, db: Session = Depends(get_db)):
+    requests.delete(f'{REVIEW_URL}/delete-reviews/{book_id}')
     return book_services.delete_book(book_id, db)
 
 
