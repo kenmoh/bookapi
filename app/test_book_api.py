@@ -44,7 +44,7 @@ def test_add_book():
 
 
 def test_update_book():
-    response = client.put(f'{BASE_URL}/5', json=update_data)
+    response = client.put(f'{BASE_URL}/7', json=update_data)
     assert response.status_code == status.HTTP_202_ACCEPTED
 
 
@@ -53,7 +53,7 @@ def test_get_book():
     Test get book by ID
     :return: Book object
     """
-    response = client.get(f'{BASE_URL}/5')
+    response = client.get(f'{BASE_URL}/7')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -62,7 +62,7 @@ def test_get_book_reviews():
     Get all reviews for a single book
     :return: List of reviews for a book
     """
-    response = client.get(f'{BASE_URL}/reviews/5')
+    response = client.get(f'{BASE_URL}/reviews/7')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -71,7 +71,7 @@ def test_add_book_review():
     Add review to a book
     :return:  object
     """
-    response = client.post(f'{BASE_URL}/reviews/5', json=review_data)
+    response = client.post(f'{BASE_URL}/reviews/7', json=review_data)
     assert response.status_code == status.HTTP_201_CREATED
 
 
@@ -80,10 +80,10 @@ def test_avg_book_rating():
     Get average rating of a book
     :return: average rating
     """
-    response = client.get(f'{BASE_URL}/average-rating/5')
+    response = client.get(f'{BASE_URL}/average-rating/7')
     assert response.status_code == status.HTTP_200_OK
 
 
 def test_delete_book():
-    response = client.delete(f'{BASE_URL}/5')
+    response = client.delete(f'{BASE_URL}/7')
     assert response.status_code == status.HTTP_204_NO_CONTENT

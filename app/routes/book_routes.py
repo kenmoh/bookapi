@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 import requests
 from sqlalchemy.orm import Session
 
@@ -45,10 +45,13 @@ def get_book_reviews(book_id: int) -> list[ReviewResponseSchema]:
 
 
 @book_router.post('/reviews/{book_id}', status_code=status.HTTP_201_CREATED)
-def add_review(book_id: int, review: ReviewCreateSchema) -> ReviewResponseSchema:
+def add_review(book_id: int, review: ReviewCreateSchema, db: Session = Depends(get_db)) -> ReviewResponseSchema:
+    book = book_services.get_book(book_id, db)
     data = {
        "review_body": review.review_body, "review_by": review.review_by, 'rating': review.rating
     }
+    if not book:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Book with ID: {book_id} not found!')
     response = requests.post(f'{REVIEW_URL}/{book_id}', json=data)
     data = response.json()
     return data
