@@ -44,7 +44,7 @@ def test_add_book():
 
 
 def test_update_book():
-    response = client.put(f'{BASE_URL}/4', json=update_data)
+    response = client.put(f'{BASE_URL}/5', json=update_data)
     assert response.status_code == status.HTTP_202_ACCEPTED
 
 
@@ -53,7 +53,7 @@ def test_get_book():
     Test get book by ID
     :return: Book object
     """
-    response = client.get(f'{BASE_URL}/4')
+    response = client.get(f'{BASE_URL}/3')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -82,3 +82,8 @@ def test_avg_book_rating():
     """
     response = client.get(f'{BASE_URL}/average-rating/5')
     assert response.status_code == status.HTTP_200_OK
+
+
+def test_delete_book():
+    response = client.delete(f'{BASE_URL}/3')
+    assert response.status_code == status.HTTP_204_NO_CONTENT
