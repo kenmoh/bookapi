@@ -72,5 +72,9 @@ def test_add_book_review():
 
 
 def test_avg_book_rating():
+    """
+    Get average rating of a book
+    :return: average rating
+    """
     response = client.get(f'{BASE_URL}/average-rating/5')
     assert response.status_code == status.HTTP_200_OK
