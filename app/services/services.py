@@ -71,10 +71,10 @@ def get_movie_casts(movie_id: int, db: session):
     return db.query(Cast).filter(Cast.movie_id == movie_id).all()
 
 
-def add_cast(cast: CastCreateSchema, db: session):
+def add_cast(movie_id: int, cast: CastCreateSchema, db: session):
     try:
         with session.begin():
-            new_cast = Cast(full_anme=cast.full_anme)
+            new_cast = Cast(movie_id=movie_id, full_name=cast.full_name)
 
             db.add(new_cast)
             db.commit()
@@ -87,12 +87,12 @@ def add_cast(cast: CastCreateSchema, db: session):
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 
 
-def update_cast(cast_id: int, movie: CastCreateSchema, db: session):
+def update_cast(cast_id: int, cast: CastCreateSchema, db: session):
     db_cast = db.query(Cast).filter(Cast.id == cast_id).first()
 
     if db_cast is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Cast with ID: {db_cast} not found!')
-    db_cast.full_name = movie.full_name
+    db_cast.full_name = cast.full_name
 
     db.commit()
     db.refresh(db_cast)

@@ -19,7 +19,7 @@ class CastResponseSchema(CastCreateSchema):
 
 class MovieCreateSchema(BaseModel):
     title: str = Field(min_length=1, max_length=50, title='Movie title')
-    length: str = Field(min_length=1, max_length=75, title='Movie duration')
+    length: float = Field(title='Movie duration')
     description: str = Field(max_length=225, title='Summary of the book')
     cover_image_url: str = Field(title='Movie cover image')
 
