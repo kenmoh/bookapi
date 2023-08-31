@@ -47,7 +47,7 @@ def delete_movie(movie_id: int, db: Session = Depends(get_db)):
 @movie_router.get('/reviews/{movie_id}', status_code=status.HTTP_200_OK)
 def get_movie_reviews(movie_id: int) -> list[ReviewResponseSchema]:
     response = requests.get(f'{REVIEW_URL}/{movie_id}')
-    data: list = response.json()
+    data = response.json()
     return data
 
 
@@ -55,7 +55,7 @@ def get_movie_reviews(movie_id: int) -> list[ReviewResponseSchema]:
 def add_review(movie_id: int, review: ReviewCreateSchema, db: Session = Depends(get_db)) -> ReviewResponseSchema:
     movie = services.get_movie(movie_id, db)
     data = {
-        "review_body": review.review_body, "review_by": review.review_by, 'rating': review.rating
+        "comment": review.comment, "author": review.author, 'rating': review.rating
     }
     if not movie:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f'Movie with ID: {movie_id} not found!')
