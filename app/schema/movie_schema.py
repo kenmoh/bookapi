@@ -1,18 +1,5 @@
 from pydantic import BaseModel, Field
 
-""" START CAST SCHEMA"""
-
-
-class CastCreateSchema(BaseModel):
-    full_name: str
-
-
-class CastResponseSchema(CastCreateSchema):
-    id: int
-    movie_id: int
-
-
-""" END CAST SCHEMA """
 
 """ START MOVIE SCHEMA """
 
@@ -22,11 +9,11 @@ class MovieCreateSchema(BaseModel):
     length: float = Field(title='Movie duration')
     description: str = Field(max_length=225, title='Summary of the book')
     cover_image_url: str = Field(title='Movie cover image')
+    casts: str = Field(title="List of casts separated by comma")
 
 
 class MovieResponseSchema(MovieCreateSchema):
     id: int
-    casts: list[CastResponseSchema] | None
 
 
 """ END MOVIE SCHEMA"""

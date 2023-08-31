@@ -3,8 +3,8 @@ import requests
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.schema.movie_schema import MovieCreateSchema, MovieResponseSchema, ReviewResponseSchema, ReviewCreateSchema, \
-    CastResponseSchema, CastCreateSchema
+from app.schema.movie_schema import MovieCreateSchema, MovieResponseSchema, ReviewResponseSchema, ReviewCreateSchema
+
 from app.services import services
 
 movie_router = APIRouter(tags=['Movies'], prefix='/api/movies')
@@ -64,6 +64,12 @@ def add_review(movie_id: int, review: ReviewCreateSchema, db: Session = Depends(
     return data
 
 
+@movie_router.delete('/reviews/{review_id}', status_code=status.HTTP_204_NO_CONTENT)
+def delete_review(review_id: int):
+    response = requests.delete(f'{REVIEW_URL}/delete-review/{review_id}')
+    return response
+
+
 @movie_router.get('/average-rating/{movie_id}', status_code=status.HTTP_200_OK)
 def get_avg_movie_rating(movie_id: int) -> float:
     response = requests.get(f'{REVIEW_URL}/average-rating/{movie_id}')
@@ -73,27 +79,4 @@ def get_avg_movie_rating(movie_id: int) -> float:
 
 """ END REVIEW ROUTE """
 
-""" START CAST ROUTE """
 
-
-@movie_router.get('/{movie_id}/casts', status_code=status.HTTP_200_OK)
-def get_movie_casts(movie_id: int, db: Session = Depends(get_db)) -> list[CastResponseSchema]:
-    return services.get_movie_casts(movie_id, db)
-
-
-@movie_router.post('/{movie_id}/casts', status_code=status.HTTP_201_CREATED)
-def add_movie_cast(movie_id: int, cast: CastCreateSchema, db: Session = Depends(get_db)) -> CastResponseSchema:
-    return services.add_cast(movie_id, cast, db)
-
-
-@movie_router.put('/{cast_id}/update-casts', status_code=status.HTTP_202_ACCEPTED)
-def update_cast(cast_id: int, cast: CastCreateSchema, db: Session = Depends(get_db)) -> CastResponseSchema:
-    return services.update_cast(cast_id, cast, db)
-
-
-@movie_router.delete('/{cast_id}/delete-cast', status_code=status.HTTP_204_NO_CONTENT)
-def delete_cast(cast_id, db: Session = Depends(get_db)):
-    return services.delete_cast(cast_id, db)
-
-
-""" END CAST ROUTE"""
