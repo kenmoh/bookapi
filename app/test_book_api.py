@@ -73,7 +73,7 @@ def test_add_movie_review():
     Add review to a movie
     :return:  object
     """
-    response = client.post(f'{BASE_URL}/reviews/8', json=review_data)
+    response = client.post(f'{BASE_URL}/reviews/3', json=review_data)
     assert response.status_code == status.HTTP_201_CREATED
 
 
@@ -87,5 +87,10 @@ def test_avg_movie_rating():
 
 
 def test_delete_movie():
-    response = client.delete(f'{BASE_URL}/4')
+    response = client.delete(f'{BASE_URL}/5')
+    assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
+def test_delete_movie_review():
+    response = client.delete(f'{BASE_URL}/reviews/10')
     assert response.status_code == status.HTTP_204_NO_CONTENT
