@@ -95,7 +95,7 @@ def test_delete_movie():
     This route test delete movie route
     :return: status == 204
     """
-    response = client.delete(f'{BASE_URL}/1')
+    response = client.delete(f'{BASE_URL}/2')
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
@@ -104,5 +104,5 @@ def test_delete_movie_review():
     This function test a delete review route
     :return: status == 204
     """
-    response = client.delete(f'{BASE_URL}/reviews/19')
+    response = client.delete(f'{BASE_URL}/reviews/25')
     assert response.status_code == status.HTTP_204_NO_CONTENT
