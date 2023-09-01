@@ -36,4 +36,8 @@ class ReviewCreateSchema(BaseModel):
     rating: int = Field(gt=0, le=5)
 
 
+class AverageMovieReview(BaseModel):
+    average_rating: float
+
+
 """ END REVIEW SCHEMA"""

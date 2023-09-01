@@ -3,7 +3,7 @@ import requests
 from sqlalchemy.orm import Session
 
 from app.database import get_db
-from app.schema.movie_schema import MovieCreateSchema, MovieResponseSchema, ReviewResponseSchema, ReviewCreateSchema
+from app.schema.movie_schema import MovieCreateSchema, MovieResponseSchema, ReviewResponseSchema, ReviewCreateSchema, AverageMovieReview
 
 from app.services import services
 
@@ -71,9 +71,9 @@ def delete_review(review_id: int):
 
 
 @movie_router.get('/average-rating/{movie_id}', status_code=status.HTTP_200_OK)
-def get_avg_movie_rating(movie_id: int) -> float:
+def get_avg_movie_rating(movie_id: int) -> AverageMovieReview:
     response = requests.get(f'{REVIEW_URL}/average-rating/{movie_id}')
-    avg_rating: float = response.json()
+    avg_rating = response.json()
     return avg_rating
 
 

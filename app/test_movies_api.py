@@ -19,7 +19,7 @@ data = {
 
 update_data = {
     "title": "Snake and Tiger",
-    "length": 2.58,
+    "length": 3.58,
     "description": "Nollywood Movie",
     "cover_image_url": "string.png",
     "casts": "Zubi Michael, Kanayo O. Kanayo",
@@ -30,7 +30,7 @@ update_data = {
 review_data = {
     "author": "Lee Sammy",
     "comment": "Testing",
-    "rating": 5
+    "rating": 4
 }
 
 
@@ -50,7 +50,7 @@ def test_add_movie():
 
 
 def test_update_movie():
-    response = client.put(f'{BASE_URL}/3', json=update_data)
+    response = client.put(f'{BASE_URL}/4', json=update_data)
     assert response.status_code == status.HTTP_202_ACCEPTED
 
 
@@ -59,7 +59,7 @@ def test_get_movie():
     Test get book by ID
     :return: Book object
     """
-    response = client.get(f'{BASE_URL}/3')
+    response = client.get(f'{BASE_URL}/4')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -68,7 +68,7 @@ def test_get_movie_reviews():
     Get all reviews for a single book
     :return: List of reviews for a movie
     """
-    response = client.get(f'{BASE_URL}/reviews/3')
+    response = client.get(f'{BASE_URL}/reviews/4')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -77,7 +77,7 @@ def test_add_movie_review():
     Add review to a movie
     :return:  status == 201
     """
-    response = client.post(f'{BASE_URL}/reviews/2', json=review_data)
+    response = client.post(f'{BASE_URL}/reviews/5', json=review_data)
     assert response.status_code == status.HTTP_201_CREATED
 
 
@@ -86,7 +86,7 @@ def test_avg_movie_rating():
     Get average rating of a movie
     :return: average rating, status == 200
     """
-    response = client.get(f'{BASE_URL}/average-rating/3')
+    response = client.get(f'{BASE_URL}/average-rating/4')
     assert response.status_code == status.HTTP_200_OK
 
 
@@ -95,7 +95,7 @@ def test_delete_movie():
     This route test delete movie route
     :return: status == 204
     """
-    response = client.delete(f'{BASE_URL}/2')
+    response = client.delete(f'{BASE_URL}/3')
     assert response.status_code == status.HTTP_204_NO_CONTENT
 
 
@@ -104,5 +104,7 @@ def test_delete_movie_review():
     This function test a delete review route
     :return: status == 204
     """
-    response = client.delete(f'{BASE_URL}/reviews/25')
+    response = client.delete(f'{BASE_URL}/reviews/29')
     assert response.status_code == status.HTTP_204_NO_CONTENT
+
+
