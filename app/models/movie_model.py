@@ -14,6 +14,8 @@ class Movie(Base):
     description: Mapped[str] = mapped_column(String(100))
     cover_image_url: Mapped[str]
     casts: Mapped[str]
+    genre: Mapped[str]
+    thriller: Mapped[str]
 
     def get_casts_list(self):
         return self.casts.split(',')

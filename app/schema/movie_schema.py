@@ -10,6 +10,8 @@ class MovieCreateSchema(BaseModel):
     description: str = Field(max_length=225, title='Summary of the book')
     cover_image_url: str = Field(title='Movie cover image')
     casts: str = Field(title="List of casts separated by comma")
+    genre: str
+    thriller: str
 
 
 class MovieResponseSchema(MovieCreateSchema):

@@ -18,7 +18,9 @@ def add_movie(movie: MovieCreateSchema, db: session):
                 length=movie.length,
                 description=movie.description,
                 cover_image_url=movie.cover_image_url,
-                casts=movie.casts
+                casts=movie.casts,
+                thriller=movie.thriller,
+                genre=movie.genre
             )
 
             db.add(new_movie)
@@ -48,6 +50,8 @@ def update_movie(movie_id: int, movie: MovieCreateSchema, db: session):
     db_movie.length = movie.length
     db_movie.title = movie.title
     db.casts = movie.casts
+    db.thriller = movie.thriller
+    db.genre = movie.genre
 
     db.commit()
     db.refresh(db_movie)
