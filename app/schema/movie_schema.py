@@ -5,17 +5,17 @@ from pydantic import BaseModel, Field
 
 
 class MovieCreateSchema(BaseModel):
-    title: str = Field(min_length=1, max_length=50, title='Movie title')
-    length: float = Field(title='Movie duration')
-    description: str = Field(max_length=225, title='Summary of the book')
-    cover_image_url: str = Field(title='Movie cover image')
-    casts: str = Field(title="List of casts separated by comma")
+    title: str = Field(min_length=1, max_length=50, description='Movie title')
+    length: float = Field(description='Movie duration')
+    description: str = Field(max_length=225, description='Summary of the book')
+    casts: str = Field(description="List of casts separated by comma")
     genre: str
     thriller: str
 
 
 class MovieResponseSchema(MovieCreateSchema):
     id: int
+    cover_image_url: str
 
 
 """ END MOVIE SCHEMA"""

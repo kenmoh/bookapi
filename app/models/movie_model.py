@@ -17,8 +17,6 @@ class Movie(Base):
     genre: Mapped[str]
     thriller: Mapped[str]
 
-    def get_casts_list(self):
-        return self.casts.split(',')
 
     def __str__(self):
         return self.title

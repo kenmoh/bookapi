@@ -14,7 +14,7 @@ data = {
     "cover_image_url": "string.png",
     "casts": "Ramsey Noah Jr, Liz Benson",
     "genre": "Drama",
-    "thriller": "thriller url"
+    "trailer": "thriller url"
 }
 
 update_data = {
@@ -24,7 +24,7 @@ update_data = {
     "cover_image_url": "string.png",
     "casts": "Zubi Michael, Kanayo O. Kanayo",
     "genre": "Drama",
-    "thriller": "thriller url"
+    "trailer": "thriller url"
 }
 
 review_data = {
