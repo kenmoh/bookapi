@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, status
 import requests
 from sqlalchemy.orm import Session
 
@@ -6,9 +6,6 @@ from app.database import get_db
 from app.forms import AddMovieForm
 from app.schema.movie_schema import (
     MovieResponseSchema,
-    ReviewResponseSchema,
-    ReviewCreateSchema,
-    AverageMovieReview,
 )
 from app.services import movie_services
 
