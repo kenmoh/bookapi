@@ -1,6 +1,5 @@
 import boto3
 from fastapi import UploadFile, HTTPException, status
-from PIL import Image
 import secrets
 
 from app.config import settings
@@ -16,11 +15,13 @@ s3 = boto3.resource(
 async def add_image(image: UploadFile):
     token_name = secrets.token_hex(12)
     file_name = f"{token_name}{image.filename}"
-    supported_ext = ['png', 'jpg', 'jpeg']
-    file_ext = file_name.split('.')[1]
+    supported_ext = ["png", "jpg", "jpeg"]
+    file_ext = file_name.split(".")[1]
 
     if file_ext not in supported_ext:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Unsupported file type.')
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST, detail="Unsupported file type."
+        )
     bucket = s3.Bucket(aws_bucket_name)
     bucket.upload_fileobj(image.file, file_name)
 
@@ -33,6 +34,3 @@ async def delete_image(image_name: str):
     bucket = s3.Bucket(aws_bucket_name)
 
     return bucket.delete_fileobj(bucket, image_name)
-
-
-

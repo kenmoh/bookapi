@@ -4,11 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.models import movie_model
 from app.database import engine
-from app.routes import movie_routes
+from app.routes import movie_routes, review
 
 movie_model.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title='MoviesAPI', description='A Simple Movie Review REST API to demonstrate microservices')
+app = FastAPI(
+    title="MoviesAPI",
+    description="A Simple Movie Review REST API to demonstrate microservices",
+)
 
 origins = [
     "http://localhost",
@@ -24,10 +27,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get('/')
-async def health_check():
-    return {'health_status': status.HTTP_200_OK}
 
+@app.get("/")
+async def health_check():
+    return {"health_status": status.HTTP_200_OK}
 
 
 app.include_router(movie_routes.movie_router)
+app.include_router(review.review_router)

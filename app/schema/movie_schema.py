@@ -1,13 +1,14 @@
 from pydantic import BaseModel, Field
+from .review_schema import ReviewResponseSchema
 
 
 """ START MOVIE SCHEMA """
 
 
 class MovieCreateSchema(BaseModel):
-    title: str = Field(min_length=1, max_length=50, description='Movie title')
-    length: float = Field(description='Movie duration')
-    description: str = Field(max_length=225, description='Summary of the book')
+    title: str = Field(min_length=1, max_length=50, description="Movie title")
+    length: float = Field(description="Movie duration")
+    description: str = Field(max_length=225, description="Summary of the book")
     casts: str = Field(description="List of casts separated by comma")
     genre: str
     thriller: str
@@ -16,6 +17,7 @@ class MovieCreateSchema(BaseModel):
 class MovieResponseSchema(MovieCreateSchema):
     id: int
     cover_image_url: str
+    reviews: list[ReviewResponseSchema]
 
 
 """ END MOVIE SCHEMA"""
@@ -23,11 +25,11 @@ class MovieResponseSchema(MovieCreateSchema):
 """ START REVIEW SCHEMA """
 
 
-class ReviewResponseSchema(BaseModel):
-    movie_id: int
-    author: str
-    comment: str
-    rating: int | None
+# class ReviewResponseSchema(BaseModel):
+#     movie_id: int
+#     author: str
+#     comment: str
+#     rating: int | None
 
 
 class ReviewCreateSchema(BaseModel):
