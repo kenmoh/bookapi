@@ -18,6 +18,7 @@ def add_new_review(
     movie_id: int, ip_address: str, review: ReviewCreateSchema, db: session
 ):
     existing_review = db.query(Review).filter(Review.movie_id == movie_id, Review.ip_address == ip_address).first()
+    ratings = db.query(Review).filter(Review.movie_id == movie_id).all()
 
     if existing_review:
         raise HTTPException(
@@ -31,6 +32,7 @@ def add_new_review(
                 comment=review.comment,
                 rating=review.rating,
                 ip_address=ip_address,
+                average_raring=sum([[rating.rating for rating in ratings] if len(ratings) > 0 else 0])
             )
             db.add(new_review)
             db.commit()
