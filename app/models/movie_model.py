@@ -1,6 +1,6 @@
 from decimal import Decimal
-from sqlalchemy import String, Integer, DECIMAL
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Integer, DECIMAL, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
 
@@ -16,10 +16,19 @@ class Movie(Base):
     casts: Mapped[str]
     genre: Mapped[str]
     thriller: Mapped[str]
-
+    reviews: Mapped[list['Movie']] = relationship("Review", back_populates="movie", cascade="all, delete-orphan")
 
     def __str__(self):
         return self.title
 
 
+class Review(Base):
+    __tablename__ = 'reviews'
 
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
+    author: Mapped[str]
+    comment: Mapped[str]
+    rating: Mapped[int]
+    ip_address: Mapped[str]
+    movie_id: Mapped[int] = mapped_column(ForeignKey("movies.id"), nullable=False)
+    movie = relationship(Movie, back_populates="reviews")
