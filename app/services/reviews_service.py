@@ -32,7 +32,7 @@ def add_new_review(
                 comment=review.comment,
                 rating=review.rating,
                 ip_address=ip_address,
-                average_raring=sum([[rating.rating for rating in ratings] if len(ratings) > 0 else 0])
+
             )
             db.add(new_review)
             db.commit()

@@ -31,7 +31,6 @@ class Review(Base):
     author: Mapped[str]
     comment: Mapped[str]
     rating: Mapped[int]
-    average_raring: Mapped[float] = mapped_column(Integer, nullable=True)
     ip_address: Mapped[str] = mapped_column(String(255))
     movie_id: Mapped[int] = mapped_column(ForeignKey("movies.id"), nullable=False)
     movie = relationship(Movie, back_populates="reviews")
