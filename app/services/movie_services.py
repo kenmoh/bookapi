@@ -58,7 +58,6 @@ def get_movie(movie_id, db: session):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Movie with ID: {movie_id} not found!",
         )
-    print(movie.reviews)
     return movie
 
 
