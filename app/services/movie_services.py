@@ -69,6 +69,12 @@ def get_movie(movie_id, db: session):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Movie with ID: {movie_id} not found!",
         )
+    if movie.reviews:
+        average_rating = sum(review.rating for review in movie.reviews) / len(movie.reviews)
+        movie.average_rating = average_rating
+    else:
+        movie.average_rating = 0.0
+
     return movie
 
 

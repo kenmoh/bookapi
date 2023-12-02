@@ -17,7 +17,7 @@ class MovieCreateSchema(BaseModel):
 class MovieResponseSchema(MovieCreateSchema):
     id: int
     cover_image_url: str
-    average_rating: float | None
+    average_rating: float
     reviews: list[ReviewResponseSchema]
 
 
@@ -26,21 +26,10 @@ class MovieResponseSchema(MovieCreateSchema):
 """ START REVIEW SCHEMA """
 
 
-# class ReviewResponseSchema(BaseModel):
-#     movie_id: int
-#     author: str
-#     comment: str
-#     rating: int | None
-
-
 class ReviewCreateSchema(BaseModel):
     author: str
     comment: str
     rating: int = Field(gt=0, le=5)
-
-
-class AverageMovieReview(BaseModel):
-    average_rating: float
 
 
 """ END REVIEW SCHEMA"""
