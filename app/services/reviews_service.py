@@ -66,21 +66,6 @@ def delete_review(review_id: int, db: session):
     db.commit()
 
 
-def get_average_rating_by_movie(movie_id, db: session):
-    try:
-        ratings = db.query(Review).filter(Review.movie_id == movie_id).all()
-        if len(ratings) > 0:
-            return {
-                "average_rating": sum([rating.rating for rating in ratings])
-                / len(ratings)
-            }
-        return 0
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
-        )
-
-
 def delete_movie_reviews(movie_id: int, db: session):
     db_movie_reviews = db.query(Review).filter(Review.movie_id == movie_id).all()
 

@@ -5,7 +5,6 @@ from app.database import get_db
 from app.schema.review_schema import (
     ReviewResponseSchema,
     ReviewCreateSchema,
-    AverageMovieRating,
 )
 from app.services import reviews_service
 
@@ -35,13 +34,6 @@ def get_movie_reviews(
     movie_id: int, db: Session = Depends(get_db)
 ) -> list[ReviewResponseSchema]:
     return reviews_service.get_all_reviews_by_movie(movie_id, db)
-
-
-@review_router.get("/average-rating/{movie_id}", status_code=status.HTTP_200_OK)
-def get_movie_avg_rating(
-    movie_id: int, db: Session = Depends(get_db)
-) -> AverageMovieRating:
-    return reviews_service.get_average_rating_by_movie(movie_id, db)
 
 
 @review_router.delete(

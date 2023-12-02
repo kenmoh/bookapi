@@ -28,7 +28,6 @@ def get_all_movies(db: session):
     return movies
 
 
-
 def add_movie(movie: AddMovieForm, db: session):
     """
     Add new movie to the database service
