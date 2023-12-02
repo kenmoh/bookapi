@@ -10,7 +10,6 @@ class ReviewCreateSchema(BaseModel):
 class ReviewResponseSchema(ReviewCreateSchema):
     id: int
     movie_id: int
-    average_rating: float
 
 
 class AverageMovieRating(BaseModel):

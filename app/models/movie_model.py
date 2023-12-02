@@ -16,6 +16,7 @@ class Movie(Base):
     casts: Mapped[str]
     genre: Mapped[str]
     thriller: Mapped[str]
+    average_rating: Mapped[float] = mapped_column(Float, nullable=True)
     reviews: Mapped[list["Movie"]] = relationship(
         "Review", back_populates="movie", cascade="all, delete-orphan"
     )
@@ -31,7 +32,6 @@ class Review(Base):
     author: Mapped[str]
     comment: Mapped[str]
     rating: Mapped[int]
-    average_rating: Mapped[float] = mapped_column(Float)
     ip_address: Mapped[str] = mapped_column(String(255))
     movie_id: Mapped[int] = mapped_column(ForeignKey("movies.id"), nullable=False)
     movie = relationship(Movie, back_populates="reviews")
