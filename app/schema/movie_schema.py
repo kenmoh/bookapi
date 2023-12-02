@@ -17,7 +17,7 @@ class MovieCreateSchema(BaseModel):
 class MovieResponseSchema(MovieCreateSchema):
     id: int
     cover_image_url: str
-    average_rating: float | None
+    average_rating: float
     reviews: list[ReviewResponseSchema]
 
 

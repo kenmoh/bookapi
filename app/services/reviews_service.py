@@ -45,13 +45,8 @@ def add_new_review(
 
 def get_all_reviews_by_movie(movie_id, db: session):
     try:
-        reviews = db.query(Review).filter(Review.movie_id == movie_id).all()
-        average_reviews = (
-            sum([review.review for review in reviews]) / len(reviews)
-            if len(reviews) > 0
-            else sum([review.review for review in reviews])
-        )
-        return {"reviews": reviews, "average_reviews": average_reviews}
+        return db.query(Review).filter(Review.movie_id == movie_id).all()
+
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)

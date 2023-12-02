@@ -3,6 +3,7 @@ from app.models.movie_model import Movie
 from app.database import session
 from app.forms import AddMovieForm
 from app.utils import delete_image
+from app.services.reviews_service import get_all_reviews_by_movie
 
 """ START MOVIE OPERATIONS """
 
@@ -14,7 +15,18 @@ def get_all_movies(db: session):
     :param db:
     :return: All movies in the database
     """
-    return db.query(Movie).all()
+    movies = db.query(Movie).all()
+    for movie in movies:
+        reviews = get_all_reviews_by_movie(movie.id, db)
+
+        if reviews:
+            average_rating = sum(review.rating for review in reviews) / len(reviews)
+            movie.average_rating = average_rating
+        else:
+            movie.average_rating = 0.0
+
+    return movies
+
 
 
 def add_movie(movie: AddMovieForm, db: session):
