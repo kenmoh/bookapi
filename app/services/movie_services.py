@@ -65,7 +65,7 @@ def add_movie(movie: AddMovieForm, db: session):
                 thriller=movie.thriller,
                 genre=movie.genre,
                 created_at=datetime.now(),
-                type=movie.item_type,
+                item_type=movie.item_type,
             )
 
             db.add(new_movie)
