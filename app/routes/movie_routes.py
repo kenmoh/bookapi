@@ -4,9 +4,7 @@ from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.forms import AddMovieForm
-from app.schema.movie_schema import (
-    MovieResponseSchema,
-)
+from app.schema.movie_schema import MovieResponseSchema, TypeEnum
 from app.services import movie_services
 
 
@@ -24,6 +22,22 @@ def get_movies(db: Session = Depends(get_db)) -> list[MovieResponseSchema]:
     :return: All Movies
     """
     return movie_services.get_all_movies(db)
+
+
+@movie_router.get("/limited-movies", status_code=status.HTTP_200_OK)
+def get_limited_movies(
+    item_type: TypeEnum, limit: int = 15, db: Session = Depends(get_db)
+) -> list[MovieResponseSchema]:
+    """
+    Get all movies from the database
+    :param db:
+    :param item_type:
+    :param limit:
+    :return: All Movies
+    """
+    return movie_services.get_limited_movies_by_type(
+        db=db, item_type=item_type, limit=limit
+    )
 
 
 @movie_router.post("", status_code=status.HTTP_201_CREATED)

@@ -11,6 +11,7 @@ class AddMovieForm:
         casts: str = Form(...),
         genre: str = Form(...),
         thriller: str = Form(...),
+        item_type: str = Form(...),
         image: UploadFile = Depends(add_image),
     ):
         self.title = title
@@ -20,3 +21,4 @@ class AddMovieForm:
         self.genre = genre
         self.thriller = thriller
         self.image = image
+        self.item_type = item_type

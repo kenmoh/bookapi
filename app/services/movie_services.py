@@ -1,11 +1,33 @@
+from datetime import datetime
 from fastapi import HTTPException, status
 from app.models.movie_model import Movie
 from app.database import session
 from app.forms import AddMovieForm
 from app.utils import delete_image
 from app.services.reviews_service import get_all_reviews_by_movie
+from app.schema.movie_schema import TypeEnum
 
 """ START MOVIE OPERATIONS """
+
+
+def get_limited_movies_by_type(db: session, item_type: TypeEnum, limit: int):
+    """
+    This function
+    gets all movies from the database
+    :param db:
+    :param limit:
+    :param item_type:
+    :return: All movies in the database
+    """
+    movies = (
+        db.query(Movie)
+        .filter(Movie.item_type == item_type)
+        .order_by("-created_at")
+        .limit(limit)
+        .all()
+    )
+
+    return movies
 
 
 def get_all_movies(db: session):
@@ -42,6 +64,8 @@ def add_movie(movie: AddMovieForm, db: session):
                 casts=movie.casts,
                 thriller=movie.thriller,
                 genre=movie.genre,
+                created_at=datetime.now(),
+                type=movie.item_type,
             )
 
             db.add(new_movie)
@@ -70,7 +94,9 @@ def get_movie(movie_id, db: session):
             detail=f"Movie with ID: {movie_id} not found!",
         )
     if movie.reviews:
-        average_rating = sum(review.rating for review in movie.reviews) / len(movie.reviews)
+        average_rating = sum(review.rating for review in movie.reviews) / len(
+            movie.reviews
+        )
         movie.average_rating = average_rating
     else:
         movie.average_rating = 0.0
