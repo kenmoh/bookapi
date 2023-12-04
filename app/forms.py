@@ -9,9 +9,9 @@ class AddMovieForm:
         title: str = Form(...),
         descr: str = Form(...),
         casts: str = Form(...),
-        genre: str = Form(...),
-        thriller: str = Form(...),
-        item_type: str = Form(...),
+        genre: str = Form(None),
+        thriller: str = Form(None),
+        item_type: str = Form(None),
         image: UploadFile = Depends(add_image),
     ):
         self.title = title
