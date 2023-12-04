@@ -1,5 +1,6 @@
 from datetime import datetime
 from fastapi import HTTPException, status
+from sqlalchemy import desc
 from app.models.movie_model import Movie
 from app.database import session
 from app.forms import AddMovieForm
@@ -22,7 +23,7 @@ def get_limited_movies_by_type(db: session, item_type: TypeEnum, limit: int):
     movies = (
         db.query(Movie)
         .filter(Movie.item_type == item_type)
-        .order_by("-created_at")
+        .order_by(desc(Movie.created_at))
         .limit(limit)
         .all()
     )
