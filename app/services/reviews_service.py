@@ -1,5 +1,5 @@
 from fastapi import HTTPException, status
-
+from sqlalchemy import desc
 from app.models.movie_model import Review
 from app.database import session
 from app.schema.review_schema import ReviewCreateSchema
@@ -45,7 +45,7 @@ def add_new_review(
 
 def get_all_reviews_by_movie(movie_id, db: session):
     try:
-        return db.query(Review).filter(Review.movie_id == movie_id).all()
+        return db.query(Review).filter(Review.movie_id == movie_id).order_by(desc(Review.created_at)).all()
 
     except Exception as e:
         raise HTTPException(
