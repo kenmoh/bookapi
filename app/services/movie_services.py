@@ -31,14 +31,15 @@ def get_limited_movies_by_type(db: session, item_type: TypeEnum, limit: int):
     return movies
 
 
-def get_all_movies(db: session):
+def get_all_movies(db: session, item_type: TypeEnum):
     """
     This function
     gets all movies from the database
     :param db:
+    :param item_type:
     :return: All movies in the database
     """
-    movies = db.query(Movie).all()
+    movies = db.query(Movie).order_by(desc(Movie.created_at)).filter(Movie.item_type == item_type).all()
     for movie in movies:
         reviews = get_all_reviews_by_movie(movie.id, db)
 

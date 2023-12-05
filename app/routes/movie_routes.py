@@ -15,13 +15,14 @@ REVIEW_URL = "https://reviewapi.onrender.com/api/reviews"
 
 
 @movie_router.get("", status_code=status.HTTP_200_OK)
-def get_movies(db: Session = Depends(get_db)) -> list[MovieResponseSchema]:
+def get_movies(item_type: TypeEnum, db: Session = Depends(get_db)) -> list[MovieResponseSchema]:
     """
     Get all movies from the database
     :param db:
+    :param item_type:
     :return: All Movies
     """
-    return movie_services.get_all_movies(db)
+    return movie_services.get_all_movies(db=db, item_type=item_type)
 
 
 @movie_router.get("/limited-movies", status_code=status.HTTP_200_OK)
