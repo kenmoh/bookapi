@@ -52,6 +52,26 @@ def get_all_movies(db: session, item_type: TypeEnum):
     return movies
 
 
+def get_highest_rated(db: session):
+    """
+    This function
+    gets all movies from the database
+    :param db:
+    :return: All movies in the database
+    """
+    movies = db.query(Movie).order_by(desc(Movie.created_at)).filter(Movie.average_rating >= 4).all()
+    for movie in movies:
+        reviews = get_all_reviews_by_movie(movie.id, db)
+
+        if reviews:
+            average_rating = sum(review.rating for review in reviews) / len(reviews)
+            movie.average_rating = average_rating
+        else:
+            movie.average_rating = 0.0
+
+    return movies
+
+
 def add_movie(movie: AddMovieForm, db: session):
     """
     Add new movie to the database service

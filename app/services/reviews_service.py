@@ -7,7 +7,7 @@ from app.schema.review_schema import ReviewCreateSchema
 
 def get_all_reviews(db: session):
     try:
-        return db.query(Review).all()
+        return db.query(Review).order_by(desc(Review.created_at)).all()
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
