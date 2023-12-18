@@ -1,3 +1,4 @@
+from datetime import datetime
 from pydantic import BaseModel, Field
 
 
@@ -10,6 +11,7 @@ class ReviewCreateSchema(BaseModel):
 class ReviewResponseSchema(ReviewCreateSchema):
     id: int
     movie_id: int
+    created_at: datetime
 
 
 class AverageMovieRating(BaseModel):

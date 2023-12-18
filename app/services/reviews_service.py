@@ -1,3 +1,4 @@
+from datetime import datetime
 from fastapi import HTTPException, status
 from sqlalchemy import desc
 from app.models.movie_model import Review
@@ -35,6 +36,7 @@ def add_new_review(
         comment=review.comment,
         rating=review.rating,
         ip_address=ip_address,
+        created_at=datetime.now(),
     )
     db.add(new_review)
     db.commit()
